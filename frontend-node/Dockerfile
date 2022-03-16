@@ -15,6 +15,6 @@ RUN npm install
 
 RUN apk add curl 
 
-COPY server.js ./
+COPY server*.js ./
 
 CMD [ "npm", "start" ]
