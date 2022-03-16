@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+    backend:
+        build: 
+          context: backend-python/
+          dockerfile: Dockerfile
+          init: true
+        deploy:
+          replicas: 3
+        networks:
+          - application
+     mysqldb:
+       build: 
+          context: mysqldb/
+          dockerfile: Dockerfile
+          init: true
+       deploy:
+          replicas: 3
+       networks:
+         - application
+    frontend:
+       build: 
+         context: frontend-node/                                                                                                                                         dockerfile: Dockerfile                                                                                                                                          init: true                                                                                                                                                     deploy:                                                                                                                                                            replicas: 2
+       networks:                                                                                                                                                                - application                                                                                                                                          ports:                                                                                                                                                                - "9091-9095:8080"
+                                                                                                                                                                       depends_on:
+                                                                                                                                                                           - backend                                                                                                                                                   network               
+           application:                                                                                                                                                       name: application
