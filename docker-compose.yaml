@@ -1,27 +1,37 @@
 version: '3.7'
 services:
-    backend:
-        build: 
-          context: backend-python/
-          dockerfile: Dockerfile
-          init: true
-        deploy:
-          replicas: 3
-        networks:
-          - application
-     mysqldb:
-       build: 
-          context: mysqldb/
-          dockerfile: Dockerfile
-          init: true
-       deploy:
-          replicas: 3
-       networks:
-         - application
-    frontend:
-       build: 
-         context: frontend-node/                                                                                                                                         dockerfile: Dockerfile                                                                                                                                          init: true                                                                                                                                                     deploy:                                                                                                                                                            replicas: 2
-       networks:                                                                                                                                                                - application                                                                                                                                          ports:                                                                                                                                                                - "9091-9095:8080"
-                                                                                                                                                                       depends_on:
-                                                                                                                                                                           - backend                                                                                                                                                   network               
-           application:                                                                                                                                                       name: application
+  backend:
+        image: python:3.6-alpine
+    build: 
+      context: backend-python/
+      dockerfile: Dockerfile
+    init: true
+    networks:
+    - application-bak
+  mysqldb:
+          image: mysql  
+    build: 
+      context: mysqldb/
+      dockerfile: Dockerfile
+    init: true
+    networks:
+    - application-bak
+  frontend:
+          image: node:10-alpine 
+    build: 
+      context: frontend-node/
+      dockerfile: Dockerfile
+    init: true
+    networks:
+    - application-fr
+    - application-bak
+    ports:
+    - "9091-9095:8080"
+    depends_on:
+    - backend
+    - mysqldb  
+networks:
+  application-fr:
+    name: application-fr
+  application-bak:  
+    name: application-bak
