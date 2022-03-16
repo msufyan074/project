@@ -1,7 +1,6 @@
 version: '3.7'
 services:
   backend:
-        image: python:3.6-alpine
     build: 
       context: backend-python/
       dockerfile: Dockerfile
@@ -9,7 +8,6 @@ services:
     networks:
     - application-bak
   mysqldb:
-          image: mysql  
     build: 
       context: mysqldb/
       dockerfile: Dockerfile
@@ -17,7 +15,6 @@ services:
     networks:
     - application-bak
   frontend:
-          image: node:10-alpine 
     build: 
       context: frontend-node/
       dockerfile: Dockerfile
