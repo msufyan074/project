@@ -15,7 +15,7 @@ jobs:
   pushfront_to_docker:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'skip ci')"
-    name: Build and Push Image to Image registry
+    name: Build and Push Frontend to Image registry
     env:
       REGISTRY: docker.io
     defaults:
