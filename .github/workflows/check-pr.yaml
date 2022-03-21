@@ -60,7 +60,7 @@ jobs:
           push: true
           tags: ${{ steps.generate_vars.outputs.image }}
       - uses: jwalton/gh-find-current-pr@v1
-        id: findPr
+       
         with:
           context: .
           file: backend-python/Dockerfile
