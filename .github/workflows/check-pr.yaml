@@ -124,7 +124,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: backend-pythone/Dockerfile
+          file: backend-python/Dockerfile
           push: true
           tags: ${{ steps.generate_vars.outputs.image }}
       - uses: jwalton/gh-find-current-pr@v1
